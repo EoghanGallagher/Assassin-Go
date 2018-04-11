@@ -28,6 +28,11 @@ public class PlayerInput : MonoBehaviour {
 			m_horiz = Input.GetAxisRaw( Tags.horiz );
 			m_vert = Input.GetAxisRaw( Tags.vert );
 		}
+		else
+		{
+			m_horiz = 0;
+			m_vert = 0;
+		}
 	}
 
 }

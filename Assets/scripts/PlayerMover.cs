@@ -38,11 +38,6 @@ public class PlayerMover : MonoBehaviour {
 
 		UpdateBoard();
 
-		if( m_board != null && m_board.PlayerNode != null )
-		{
-			m_board.PlayerNode.InitNode();
-		}
-
 	}
 
 	IEnumerator Test()

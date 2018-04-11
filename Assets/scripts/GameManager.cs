@@ -20,9 +20,13 @@ public class GameManager : MonoBehaviour {
 
 	public float delay = 1f;
 
+
+	public UnityEvent setupEvent;
 	public UnityEvent startLevelEvent;
 	public UnityEvent playLevelEvent;
 	public UnityEvent endLevelEvent;
+
+
 
 	void Awake()
 	{
@@ -52,8 +56,16 @@ public class GameManager : MonoBehaviour {
 
 	IEnumerator StartLevelRoutine()
 	{
+		
+		Debug.Log( "SetUp Event" );
+		if( setupEvent != null )
+		{
+			setupEvent.Invoke();
+		} 
+		
 		Debug.Log("Start Level Co routine");
 		m_player.playerInput.InputEnabled = false;
+		TogglePlayerInput( false );
 
 		while( !HasLevelStarted )
 		{
@@ -77,7 +89,8 @@ public class GameManager : MonoBehaviour {
 		Debug.Log("Play Level Co routine");
 		IsGamePlaying = true;
 		yield return new WaitForSeconds( delay );
-		m_player.playerInput.InputEnabled = true;
+		//m_player.playerInput.InputEnabled = true;
+		TogglePlayerInput( true );
 
 		if(playLevelEvent != null)
 		{
@@ -88,17 +101,23 @@ public class GameManager : MonoBehaviour {
 		{
 			//Check for game over condition
 
+			yield return null;
+			IsGameOver = IsWinner();
+
 			//win
 			//reach the end of the level
+			
+			
 
 			//lose
 			//player dies
 
 			//IsGameover = true
 
-			yield return null;
+			
 		}
 
+		Debug.Log("You woooooooon ----------");
 		
 	}
 
@@ -106,7 +125,8 @@ public class GameManager : MonoBehaviour {
 	{
 		Debug.Log("End Level Co routine");
 		//Disable player input
-		m_player.playerInput.InputEnabled = false;
+		//m_player.playerInput.InputEnabled = false;
+		TogglePlayerInput( false );
 
 		if(endLevelEvent != null)
 		{
@@ -124,6 +144,8 @@ public class GameManager : MonoBehaviour {
 			//HasLevelFinished = true;
 			yield return null;
 		}
+
+		RestartLevel();
 		
 		
 	}
@@ -143,6 +165,29 @@ public class GameManager : MonoBehaviour {
 	public void Test()
 	{
 		Debug.Log("This works");
+	}
+
+	private bool IsWinner()
+	{
+		if( m_board.PlayerNode != null )
+		{
+			return( m_board.PlayerNode == m_board.GoalNode );
+		}
+		
+		return false;
+	}
+
+
+	private void TogglePlayerInput( bool b )
+	{
+		Debug.Log( "Player Input : " + b );
+		m_player.playerInput.InputEnabled = b;
+	}
+
+	public void ToggleHasLevelFinished( bool b )
+	{
+		Debug.Log( "Has Level Finished : " + b );
+		HasLevelFinished = b;
 	}
 	
 
