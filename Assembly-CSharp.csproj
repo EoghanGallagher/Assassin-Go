@@ -105,6 +105,7 @@
      <Compile Include="Assets\scripts\Link.cs" />
      <Compile Include="Assets\scripts\Node.cs" />
      <Compile Include="Assets\scripts\Obstacle.cs" />
+     <Compile Include="Assets\scripts\PlayerCompass.cs" />
      <Compile Include="Assets\scripts\PlayerInput.cs" />
      <Compile Include="Assets\scripts\PlayerManager.cs" />
      <Compile Include="Assets\scripts\PlayerMover.cs" />

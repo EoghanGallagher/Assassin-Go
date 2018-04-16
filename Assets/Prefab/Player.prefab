@@ -11,6 +11,22 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1680864553592088}
   m_IsPrefabParent: 1
+--- !u!1 &1569318721177916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4179157715812962}
+  - component: {fileID: 114258651610113912}
+  m_Layer: 0
+  m_Name: PlayerCompass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1680864553592088
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +75,19 @@ Transform:
   m_Father: {fileID: 4778819527619934}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!4 &4179157715812962
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569318721177916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4778819527619934}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4778819527619934
 Transform:
   m_ObjectHideFlags: 1
@@ -66,10 +95,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1680864553592088}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4014449961104616}
+  - {fileID: 4179157715812962}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -134,10 +164,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destintation: {x: 0, y: 0, z: 0}
   isMoving: 0
-  easeType: 0
-  moveSpeed: 1.5
+  easeType: 10
+  moveSpeed: 2
   delay: 0
   iTweenDelay: 0
+--- !u!114 &114258651610113912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1569318721177916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc89ae7366ab8443780bb2dd8644804a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowPrefab: {fileID: 1104063306385514, guid: 7164dbb562c384667a095afb4a344756,
+    type: 2}
+  scale: 1
+  startDistance: 0.3
+  endDistance: 0.5
+  moveTime: 1
+  easeType: 17
+  delay: 0
 --- !u!114 &114447516576639180
 MonoBehaviour:
   m_ObjectHideFlags: 1

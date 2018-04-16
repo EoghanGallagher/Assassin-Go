@@ -6,6 +6,8 @@ public class PlayerMover : MonoBehaviour {
 
 	[SerializeField]
 	private Vector3 destintation;
+
+	private PlayerCompass m_playerCompass;
 	
 	
 	public bool isMoving = false;
@@ -27,6 +29,14 @@ public class PlayerMover : MonoBehaviour {
 		if( m_board == null )
 		{
 			Debug.Log( "Board Object or script not found" );
+			return;
+		}
+
+		m_playerCompass = Object.FindObjectOfType<PlayerCompass>().GetComponent<PlayerCompass>();
+
+		if( m_playerCompass == null )
+		{
+			Debug.Log( "PlayerCompass Object or script not found" );
 			return;
 		}
 	}
@@ -69,6 +79,11 @@ public class PlayerMover : MonoBehaviour {
 	{
 		isMoving = true;
 
+		if( m_playerCompass != null )
+		{
+			m_playerCompass.ShowArrows( false );
+		}
+
 		yield return new WaitForSeconds( delayTime );
 
 		iTween.MoveTo( gameObject, iTween.Hash(
@@ -91,6 +106,12 @@ public class PlayerMover : MonoBehaviour {
 		isMoving = false;
 
 		UpdateBoard();
+
+
+		if( m_playerCompass != null )
+		{
+			m_playerCompass.ShowArrows( true );
+		}
 		
 	}
 
