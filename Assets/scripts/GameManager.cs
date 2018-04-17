@@ -3,12 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
+
+[System.Serializable]
+public enum Turn
+{
+	Player,
+	Enemy
+}
+
 
 public class GameManager : MonoBehaviour {
 
 	
 	Board m_board;
 	PlayerManager m_player;
+
+	[SerializeField] private List<EnemyManager> m_enemies;
+	[SerializeField] private Turn m_currentTurn = Turn.Player;
+	public Turn CurrentTurn { get{ return m_currentTurn; } }
 	// Use this for initialization
 
 	public bool HasLevelStarted {get; private set; }
@@ -30,8 +44,12 @@ public class GameManager : MonoBehaviour {
 
 	void Awake()
 	{
-		m_board = Object.FindObjectOfType<Board>().GetComponent<Board>();
-		m_player = Object.FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+		m_board = GameObject.FindObjectOfType<Board>().GetComponent<Board>();
+		m_player = GameObject.FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+		
+		EnemyManager[] enemies = GameObject.FindObjectsOfType<EnemyManager>() as EnemyManager[];
+
+		m_enemies = enemies.ToList();
 	}
 	void Start () 
 	{
@@ -188,6 +206,61 @@ public class GameManager : MonoBehaviour {
 	{
 		Debug.Log( "Has Level Finished : " + b );
 		HasLevelFinished = b;
+	}
+
+
+	private void PlayPlayerTurn()
+	{
+		m_currentTurn = Turn.Player;
+		m_player.IsTurnComplete = false;
+
+		//Allow player to move
+	}
+
+	private void PlayEnemyTurn()
+	{
+		m_currentTurn = Turn.Enemy;
+
+		foreach( EnemyManager enemy in m_enemies )
+		{
+			if( enemy != null )
+			{
+				enemy.IsTurnComplete = false;
+
+				//Play each enemies turn
+				enemy.PlayTurn();
+			}
+		}
+	}
+
+	private bool IsEnemyTurnComplete()
+	{
+		foreach( EnemyManager enemy in m_enemies )
+		{
+			if( !enemy.IsTurnComplete )
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void UpdateTurn()
+	{
+		if( m_currentTurn == Turn.Player && m_player != null )
+		{
+			if( m_player.IsTurnComplete )
+			{
+				PlayEnemyTurn();
+			}
+		}
+		else if( m_currentTurn == Turn.Enemy )
+		{
+			if( IsEnemyTurnComplete() )
+			{
+				PlayPlayerTurn();
+			}
+		}
 	}
 	
 

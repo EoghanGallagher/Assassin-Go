@@ -108,7 +108,6 @@ public class PlayerCompass : MonoBehaviour
 		{
 			iTween.Stop( m_arrows[i] );
 			Vector3 dirVector = new Vector3( Board.directions[i].normalized.x, 0f, Board.directions[i].normalized.y );
-			Debug.Log( dirVector );
 			m_arrows[i].transform.position = transform.position + dirVector * startDistance;
 		}
 	}

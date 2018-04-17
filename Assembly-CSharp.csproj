@@ -99,10 +99,14 @@
      <Compile Include="Assets\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
      <Compile Include="Assets\scripts\Board.cs" />
      <Compile Include="Assets\scripts\EndScreen.cs" />
+     <Compile Include="Assets\scripts\Enemy\EnemyManager.cs" />
+     <Compile Include="Assets\scripts\Enemy\EnemyMover.cs" />
+     <Compile Include="Assets\scripts\Enemy\EnemySensor.cs" />
      <Compile Include="Assets\scripts\GameManager.cs" />
      <Compile Include="Assets\scripts\GraphicMover.cs" />
      <Compile Include="Assets\scripts\ITweenExample.cs" />
      <Compile Include="Assets\scripts\Link.cs" />
+     <Compile Include="Assets\scripts\Mover.cs" />
      <Compile Include="Assets\scripts\Node.cs" />
      <Compile Include="Assets\scripts\Obstacle.cs" />
      <Compile Include="Assets\scripts\PlayerCompass.cs" />
@@ -112,6 +116,7 @@
      <Compile Include="Assets\scripts\ScreenFader.cs" />
      <Compile Include="Assets\scripts\Spinner.cs" />
      <Compile Include="Assets\scripts\Tags.cs" />
+     <Compile Include="Assets\scripts\TurnManager.cs" />
      <Compile Include="Assets\scripts\Utility.cs" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\MotionBlur.cginc" />

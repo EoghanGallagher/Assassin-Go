@@ -4,15 +4,17 @@ using UnityEngine;
 
 [RequireComponent(typeof (PlayerMover))]
 [RequireComponent(typeof (PlayerInput))]
-public class PlayerManager : MonoBehaviour 
+public class PlayerManager : TurnManager
 {
 
 	public PlayerMover playerMover;
 	public PlayerInput playerInput;
 	// Update is called once per frame
 
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
 		playerMover = GetComponent<PlayerMover>();
 		playerInput = GetComponent<PlayerInput>();
 
@@ -21,7 +23,8 @@ public class PlayerManager : MonoBehaviour
 	}
 	void Update () 
 	{
-		if( playerMover.isMoving )
+		//Ignore user input if player is moving or if its not the players turn
+		if( playerMover.isMoving || m_gameManager.CurrentTurn != Turn.Player )
 		{
 			return;
 		}
