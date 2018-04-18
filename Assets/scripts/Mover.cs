@@ -6,12 +6,13 @@ using UnityEngine.Events;
 public class Mover : MonoBehaviour 
 {
 	//Where the player is currently headed
-	[SerializeField] private Vector3 destination;
+	[SerializeField] protected Vector3 destination;
 
 	[SerializeField] protected bool faceDestination = false;
 
 	//is player currently moving
 	public bool isMoving = false;
+	public bool IsMoving { get{ return isMoving; } set{ isMoving = value; } }
 
 	//what easetype to use for tweening
 	public iTween.EaseType easeType = iTween.EaseType.easeInOutExpo;
@@ -174,7 +175,7 @@ public class Mover : MonoBehaviour
 
 
 	//Rotate Object to face movement direction
-	private void FaceDestination()
+	protected void FaceDestination()
 	{
 		Vector3 relativePosition = destination - transform.position;
 

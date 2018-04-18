@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour {
 	public UnityEvent startLevelEvent;
 	public UnityEvent playLevelEvent;
 	public UnityEvent endLevelEvent;
+	public UnityEvent loseLevelEvent;
 
 
 
@@ -137,6 +138,25 @@ public class GameManager : MonoBehaviour {
 
 		Debug.Log("You woooooooon ----------");
 		
+	}
+
+	public void LoseLevel()
+	{
+		StartCoroutine( LoseLevelRoutine() );
+	}
+
+	private IEnumerator LoseLevelRoutine()
+	{
+		IsGameOver = true;
+		if( loseLevelEvent != null )
+		{
+			loseLevelEvent.Invoke();
+		}
+		
+		Debug.Log("You Lost");
+		yield return new WaitForSeconds( 2.0f );
+
+		RestartLevel();
 	}
 
 	IEnumerator EndLevelRoutine()

@@ -29,7 +29,10 @@ public class EnemySensor : MonoBehaviour
 
 	public void UpdateSensor()
 	{
+		Debug.Log( "UPDATING SENSOR" );
+
 		Vector3 worldSpacePositionToSearch = transform.TransformVector( directionToSearch ) + transform.position;
+		Debug.Log( worldSpacePositionToSearch );
 		
 		if( m_board != null )
 		{

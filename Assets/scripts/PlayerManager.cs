@@ -24,7 +24,7 @@ public class PlayerManager : TurnManager
 	void Update () 
 	{
 		//Ignore user input if player is moving or if its not the players turn
-		if( playerMover.isMoving || m_gameManager.CurrentTurn != Turn.Player )
+		if( playerMover.IsMoving || m_gameManager.CurrentTurn != Turn.Player )
 		{
 			return;
 		}

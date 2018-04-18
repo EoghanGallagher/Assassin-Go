@@ -27,16 +27,31 @@ public class EnemyManager : TurnManager
 
 	IEnumerator PlayTurnRoutine()
 	{
-		//Detect player
-		m_enemySensor.UpdateSensor();
+		
+		if( m_gameManager != null && !m_gameManager.IsGameOver )
+		{
+			//Detect player
+			m_enemySensor.UpdateSensor();
 
-		//Attack Player
-		//Wait
-		yield return new WaitForSeconds( 0.1f );
-		//Movement
-		m_enemyMover.MoveOneTurn();
+			//Wait
+			yield return new WaitForSeconds( 0f );
 
-		//Wait
+			if( m_enemySensor.FoundPlayer )
+			{
+				//Found Player 
+				Debug.Log("Found Player");
+				//Attack
+
+				//notify Gamemanager to lose the level
+				m_gameManager.LoseLevel();
+			}
+			else
+			{
+				//No Player Found
+				//Move
+				m_enemyMover.MoveOneTurn();
+			}
+		}
 		
 	}
 	
